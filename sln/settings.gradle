@@ -1,0 +1,4 @@
+rootProject.name = 'sln'
+include 'skx-dao','skx-tools','skx-web','skx-misc'
+include 'skx-third-party-gateway','skx-webapi'
+

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+
+	<context:component-scan base-package="com.skx.*" />
+
+	<mvc:annotation-driven/>
+	<mvc:resources mapping="/resources/**" location="/resources/" cache-period="604800"/>
+	<!--<mvc:resources mapping="/callcenter/order/js/**" location="/callcenter/order/js/" cache-period="604800"/>-->
+	<!--<mvc:resources mapping="/uploads/**" location="/uploads/" cache-period="604800"/>-->
+
+	<!--<mvc:interceptors>-->
+		<!--<bean class="com.postcar.user.interceptor.UserInfoInterceptor" />-->
+		<!--<mvc:interceptor>-->
+			<!--<mvc:mapping path="/fieldorder/**" />-->
+			<!--<mvc:mapping path="/order/**" />-->
+			<!--<mvc:mapping path="/profile/**" />-->
+			<!--<bean class="com.postcar.user.interceptor.AuthorizedInterceptor" />-->
+		<!--</mvc:interceptor>-->
+		<!--<mvc:interceptor>-->
+			<!--<mvc:mapping path="/admin/user-**" />-->
+			<!--<mvc:mapping path="/nav/admin/user/**" />-->
+			<!--<bean class="com.postcar.user.interceptor.AuthorizedInterceptor">-->
+				<!--<property name="requiredRoles">-->
+					<!--<list>-->
+						<!--<value>admin</value>-->
+					<!--</list>-->
+				<!--</property>-->
+			<!--</bean>-->
+		<!--</mvc:interceptor>-->
+		<!--<mvc:interceptor>-->
+			<!--<mvc:mapping path="/admin/**" />-->
+			<!--<mvc:mapping path="/nav/admin/**" />-->
+			<!--<mvc:mapping path="/nav/order/order" />-->
+			<!--<mvc:mapping path="/setting/goods/update" />-->
+			<!--<bean class="com.postcar.user.interceptor.AuthorizedInterceptor">-->
+				<!--<property name="requiredRoles">-->
+					<!--<list>-->
+						<!--<value>worker</value>-->
+						<!--<value>admin</value>-->
+					<!--</list>-->
+				<!--</property>-->
+			<!--</bean>-->
+		<!--</mvc:interceptor>-->
+	<!--</mvc:interceptors>-->
+
+	<!--<bean id="validator"-->
+		<!--class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />-->
+
+	<!--<bean id="handleExceptionResolver" class="com.framework.layer.resolver.ExceptionResolver">-->
+		<!--<property name="order" value="1" />-->
+		<!--<property name="errorPage" value="/error/error" />-->
+		<!--<property name="errorInfoKey" value="errorInfo"/>-->
+		<!--<property name="notAuthorizedInfoKey" value="notAuthorizedInfo"/>-->
+
+	<!--</bean>-->
+
+	<!--<bean id="localeResolver" class="com.framework.layer.resolver.ChineseLocaleResolver" />-->
+
+	<!--<bean-->
+		<!--class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">-->
+		<!--<property name="messageConverters">-->
+			<!--<list>-->
+				<!--<bean-->
+					<!--class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">-->
+					<!--<property name="objectMapper">-->
+						<!--<bean class="com.ykx.common.json.JacksonObjectMapper" />-->
+					<!--</property>-->
+				<!--</bean>-->
+			<!--</list>-->
+		<!--</property>-->
+	<!--</bean>-->
+
+	<!--<bean id="viewresolver"-->
+		<!--class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
+		<!--<property name="prefix" value="" />-->
+		<!--<property name="suffix" value=".jsp" />-->
+	<!--</bean>-->
+
+</beans>

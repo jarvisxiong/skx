@@ -1,0 +1,43 @@
+group 'com.skx'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'maven'
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: "file://F:/myMavenRepo/")
+        }
+    }
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    //http://repo1.maven.org/maven2 http://repo.maven.apache.org/maven2
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+    testCompile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.3'
+    testCompile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.3'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.3'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.3'
+    compile group: 'commons-collections', name: 'commons-collections', version: '3.2'
+    compile 'commons-logging:commons-logging:1.2'
+
+
+//    compile fileTree(dir: 'file://E:/Workspaces/trunk/src-code/ykx-ref-libs', include: '*.jar')
+
+}
+
+
+task testAutomationDemo(type: Test) {
+    //include '**/*SuiteTwo.*'
+    include '**/TestFile.class'
+    reports.junitXml.destination = "$buildDir/test-results/testAutomationDemo"
+    reports.html.destination = "$buildDir/test-results/testAutomationDemo"
+}
+

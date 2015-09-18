@@ -1,0 +1,33 @@
+名称解释
+    Idea概念
+        Project: 项目工程的顶级组织，相当于Visual Studio中的solution
+        Module: 独立编译的单位，相当于Visual Studio中的project
+        以上两者用于在Idea中组织文档、资源结构
+    Gradle概念
+        Group：公司、组织的代号
+        Name：项目（jar包）的的名称
+        Version ：项目（jar包）的版本号
+        以上三种用于名叫jar：比如公司名称是ykx（com.ykx），项目名称是che，版本号是1.1，那么jar名称是com.ykx.che.1.1.jar
+        Task: 在gradle环境上可以执行的任务
+
+-------------------------------------
+
+项目结构
+project(sln)
+|--doc #项目文档
+|--lib
+|--module1(project)
+|    |-- src
+|         |--main
+|         |    |--java
+|         |    |--resources
+|         |         |--conf
+|         |--test
+|         |    |--java
+|         |    |--resources
+|         |         |--conf
+|         |--build.gradle
+|         |--settings.gradle
+|--module2(project)
+|--build.gradle
+|--settings.gradle
