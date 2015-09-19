@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.skx.misc.util.JsonUtil;
+import com.google.gson.Gson;
 
 //import com.ykx.common.util.JsonUtil;
 
@@ -63,6 +63,7 @@ public class SmsServlet extends HttpServlet {
         data.put("content", content);
         responseResult.put("data", data);
 
+        Gson gson=new Gson();
         //send sms
         ISmsService smsService = new SmsService();
         try {
@@ -71,12 +72,12 @@ public class SmsServlet extends HttpServlet {
 
             responseResult.put("result_code", "error");
             responseResult.put("result_msg", ex.toString());
-            res.getWriter().println(JsonUtil.toJson(responseResult));
+            res.getWriter().println(gson.toJson(responseResult));
             return;
         }
 
         responseResult.put("result_code", "info");
-        res.getWriter().println(JsonUtil.toJson(responseResult));
+        res.getWriter().println(gson.toJson(responseResult));
     }
 
     private boolean authenticate(HttpServletRequest req, HttpServletResponse res) throws IOException {

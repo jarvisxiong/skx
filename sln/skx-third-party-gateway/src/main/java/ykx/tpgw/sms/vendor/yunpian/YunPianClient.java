@@ -11,7 +11,7 @@ import org.apache.commons.logging.LogFactory;
 public class YunPianClient implements ISmsClient {
     private static final Log logger = LogFactory.getLog(YunPianClient.class);
 
-    private        String apikey    = "6f7a78b679fc9d9256bcdb253087d320";
+    private        String apikey    = "6f7a78b679fc9d9256bcdb";
     private static String signature = "【易快修】";
 
     public String getSupplierName()

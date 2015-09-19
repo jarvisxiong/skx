@@ -6,7 +6,7 @@ import ykx.tpgw.sms.vendor.yunpian.YunPianClient;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.ykx.common.config.PropertyConfigurer;
+//import com.ykx.common.config.PropertyConfigurer;
 
 /*
  * 短信发送工厂类
@@ -18,16 +18,17 @@ public class SmsClientFactory {
 	private static final Log logger = LogFactory.getLog(SmsClientFactory.class);
 
 	static {
-		PropertyConfigurer propertyConfigurer = PropertyConfigurer.newInstance(
-				confPropertyFileNames, "UTF-8");
-		try {
-			defaultSmsVendor = SmsVendors.valueOf(
-					SmsVendors.class,
-					propertyConfigurer.get("defaultSmsVendor"));
-		} catch (Exception ex) {
-			logger.warn(ex.getMessage());
-			defaultSmsVendor = SmsVendors.yunpian;
-		}
+//		PropertyConfigurer propertyConfigurer = PropertyConfigurer.newInstance(
+//				confPropertyFileNames, "UTF-8");
+//		try {
+//			defaultSmsVendor = SmsVendors.valueOf(
+//					SmsVendors.class,
+//					propertyConfigurer.get("defaultSmsVendor"));
+//		} catch (Exception ex) {
+//			logger.warn(ex.getMessage());
+//			defaultSmsVendor = SmsVendors.yunpian;
+//		}
+		defaultSmsVendor = SmsVendors.yunpian;
 	}
 
 	public static ISmsClient create(SmsVendors smsChannelType) {

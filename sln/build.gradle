@@ -5,39 +5,37 @@ def libDir = new File(rootDir, 'lib')
 ext.nettyVersion = '4.0.26.Final'
 
 
-ext{
-    if(System.properties['os.name'].contains("Windows"))
-    {
-        os='windows'
-    }else {
-        os='linux'
+ext {
+    if (System.properties['os.name'].contains("Windows")) {
+        os = 'windows'
+    } else {
+        os = 'linux'
     }
-    sysProperties=System.properties
+    sysProperties = System.properties
     // os=System.properties['os.name']
 
 }
 
-buildscript {
-    repositories {
-        maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
-        jcenter()
-        mavenCentral()
-        mavenLocal()
-    }
-    dependencies {
-        classpath 'org.kordamp.gradle:clirr-gradle-plugin:0.2.2'
-        classpath 'com.netflix.nebula:gradle-extra-configurations-plugin:1.12.+'
-        classpath 'com.bmuschko:gradle-nexus-plugin:2.2'
-        classpath ("com.bmuschko:gradle-tomcat-plugin:2.2.2")
-    }
-}
-
+//buildscript {
+//    repositories {
+//        maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+//        jcenter()
+//        mavenCentral()
+//        mavenLocal()
+//    }
+//    dependencies {
+//        classpath 'org.kordamp.gradle:clirr-gradle-plugin:0.2.2'
+//        classpath 'com.netflix.nebula:gradle-extra-configurations-plugin:1.12.+'
+//        classpath 'com.bmuschko:gradle-nexus-plugin:2.2'
+//        classpath("com.bmuschko:gradle-tomcat-plugin:2.2.2")
+//    }
+//}
 
 //////////////////////////////////////////
 // Common behavior                      //
 //////////////////////////////////////////
 
-configure(subprojects.findAll { it.name != 'dao' }) {
+configure(subprojects.findAll { it.name != 'skx-dao' }) {
     group 'com.skx'
     version '1.0-SNAPSHOT'
     apply plugin: 'java'
@@ -63,45 +61,37 @@ configure(subprojects.findAll { it.name != 'dao' }) {
         }
     }
 
-    evaluationDependsOn(':skx-dao')
-
-    group = 'com.skx'
-    version = '1.0-SNAPSHOT'
-    sourceCompatibility = JavaVersion.VERSION_1_6
-    targetCompatibility = JavaVersion.VERSION_1_6
+   // evaluationDependsOn(':skx-dao')
 
     repositories {
-        maven { url 'http://192.168.1.10:8081/nexus/content/groups/public/' }
-        mavenCentral()
-        maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+        maven { url 'lib' }
         mavenLocal()
+        mavenCentral()
+//        maven { url 'http://10.17.4.114:8081/nexus/content/groups/public/' }
+        maven { url 'http://192.168.1.10:8081/nexus/content/groups/public/' }
+        maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
         maven { url 'file://F:/myMavenRepo/' }
-        maven { url 'lib'}
     }
+
 
     dependencies {
-        compile fileTree(dir: "$libDir",include:'*.jar')
+        compile fileTree(dir: "$libDir", include: '*.jar')
         //compile fileTree(dir: "E:/Workspaces/trunk/src-code/ykx-ref-libs",include:'*.jar')
-        compile project(':skx-dao')
-    }
-    if(it.name=='misc') {
-
-        dependencies {
-            compile fileTree(dir: "$libDir",include:'*.jar')
-            //compile fileTree(dir: "E:/Workspaces/trunk/src-code/ykx-ref-libs",include:'*.jar')
-            compile project(':skx-dao')
-            testCompile group: 'junit', name: 'junit', version: '4.11'
-            //compile 'com.skx:tools:1.0-SNAPSHOT'
-            //compile fileTree(dir: 'file://E:/Workspaces/trunk/src-code/ykx-ref-libs', include: '*.jar')
-            testCompile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.3'
-            testCompile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.3'
-            compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.3'
-            compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.3'
-            compile group: 'commons-collections', name: 'commons-collections', version: '3.2'
-            compile 'commons-logging:commons-logging:1.2'
-        }
+        //compile project(':skx-dao')
+        testCompile group: 'junit', name: 'junit', version: '4.11'
+        //compile 'com.skx:tools:1.0-SNAPSHOT'
+        //compile fileTree(dir: 'file://E:/Workspaces/trunk/src-code/ykx-ref-libs', include: '*.jar')
+        testCompile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.3'
+        testCompile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.3'
+        compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.3'
+        compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.3'
+        compile group: 'commons-collections', name: 'commons-collections', version: '3.2'
+        compile 'commons-logging:commons-logging:1.2'
+        //   }
 
     }
+
+
 
     /* Code quality */
 //    apply plugin: 'checkstyle'
@@ -124,72 +114,73 @@ configure(subprojects.findAll { it.name != 'dao' }) {
         project.hasProperty(propertyName) && project.property(propertyName).toBoolean()
     }
 
-    javadoc {
-        exclude "**/com/mongodb/**/internal/**"
-
-        dependsOn project(':skx-dao').compileJava //We need taglets to be compiled
-        options.author = true
-        options.version = true
-        options.links 'http://docs.oracle.com/javase/7/docs/api/'
-        options.tagletPath project(':skx-dao').sourceSets.main.output.classesDir
-        options.taglets 'ManualTaglet'
-        options.taglets 'ServerReleaseTaglet'
-        options.encoding = 'UTF-8'
-        options.charSet 'UTF-8'
-        options.docEncoding 'UTF-8'
-    }
+//    javadoc {
+//        exclude "**/com/mongodb/**/internal/**"
+//
+//        dependsOn project(':skx-dao').compileJava //We need taglets to be compiled
+//        options.author = true
+//        options.version = true
+//        options.links 'http://docs.oracle.com/javase/7/docs/api/'
+//        options.tagletPath project(':skx-dao').sourceSets.main.output.classesDir
+//        options.taglets 'ManualTaglet'
+//        options.taglets 'ServerReleaseTaglet'
+//        options.encoding = 'UTF-8'
+//        options.charSet 'UTF-8'
+//        options.docEncoding 'UTF-8'
+//    }
 
     clean << {
-        if(file('bin').exists())
-        {
+        if (file('bin').exists()) {
             file('bin').deleteDir()
         }
     }
 }
 
 task clean << {
-    if(file('out').exists())
-    {
+    if (file('out').exists()) {
         file('out').deleteDir()
+    }
+    if (file('build').exists()) {
+        file('build').deleteDir()
     }
 }
 
 
-
-task hello << {
-
-//    println os
-//    println os.contains("windows")
-//    println sysProperties
-  println 'task hello <<'
-//    println in2
-}
-
-task A <<{
-    println 'aaaaaaaaaaaa'
-    logger.info("AA")
-}
-
-
-hello <<{
-    A.execute()
-    println 'hello<<'
-}
-
-
-
-hello {
-
-    println 'hello'
-}
-
-hello {
-    println 'hss'
-}
-
-
-task showCommandLieProperties << {
-    println property3
-}
+//
+//task hello << {
+//
+////    println os
+////    println os.contains("windows")
+////    println sysProperties
+//    println 'task hello <<'
+////    println in2
+//}
+//
+//task A << {
+//    println 'aaaaaaaaaaaa'
+//    logger.info("AA")
+//}
+//
+//
+//hello << {
+//    A.execute()
+//    println 'hello<<'
+//}
+//
+//
+//
+//hello {
+//
+//    println 'hello'
+//}
+//
+//hello {
+//    println 'hss'
+//}
+//
+//
+//task showCommandLieProperties << {
+//    println property3
+//}
 
 

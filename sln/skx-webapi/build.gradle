@@ -7,11 +7,7 @@ apply plugin: 'com.bmuschko.tomcat'
 apply plugin: 'com.bmuschko.tomcat-base'
 def projectName="$name"
 
-//sourceCompatibility = 1.5
 
-repositories {
-    mavenCentral()
-}
 
 dependencies {
     providedCompile group: 'javax.servlet', name: 'javax.servlet-api', version: '3.0.1'
