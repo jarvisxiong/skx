@@ -66,9 +66,11 @@ configure(subprojects.findAll { it.name != 'skx-dao' }) {
     repositories {
         maven { url 'lib' }
         mavenLocal()
+//        maven { url 'http://112.126.66.37:8081/nexus/content/groups/public/'}
+        maven { url 'http://maven.oschina.net/content/groups/public/'}
         mavenCentral()
-//        maven { url 'http://10.17.4.114:8081/nexus/content/groups/public/' }
-        maven { url 'http://192.168.1.10:8081/nexus/content/groups/public/' }
+//      maven { url 'http://10.17.4.114:8081/nexus/content/groups/public/' }
+//      maven { url 'http://192.168.1.10:8081/nexus/content/groups/public/' }
         maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
         maven { url 'file://F:/myMavenRepo/' }
     }
@@ -87,6 +89,7 @@ configure(subprojects.findAll { it.name != 'skx-dao' }) {
         compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.3'
         compile group: 'commons-collections', name: 'commons-collections', version: '3.2'
         compile 'commons-logging:commons-logging:1.2'
+        compile 'log4j:log4j:1.2.17'
         //   }
 
     }

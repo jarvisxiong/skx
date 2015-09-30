@@ -8,7 +8,8 @@ apply plugin: 'maven'
 uploadArchives {
     repositories {
         mavenDeployer {
-            repository(url: "file://F:/myMavenRepo/")
+//            repository(url: "file://F:/myMavenRepo/")
+            repository(url: "http://10.17.4.114:8081/nexus/content/groups/public/")
         }
     }
 }

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skx.mybatis.model.dao.UserMapper">
+    <resultMap type="User" id="UserResult">
+        <id property="id" column="id"/>
+        <result property="login" column="login"/>
+        <result property="password" column="password"/>
+        <result property="createdDate" column="createdDate"/>
+        <result property="updatedDate" column="updatedDate"/>
+    </resultMap>
+    <select id="findAll" resultMap="UserResult">
+        SELECT * FROM USER
+    </select>
+    <select id="find" parameterType="int" resultType="User">
+        SELECT ID,LOGIN,PASSWORD,CREATEDDATE,UPDATEDDATE
+        FROM user WHERE ID=#{id}
+    </select>
+    <insert id="insert" parameterType="User">
+        INSERT INTO user(LOGIN,PASSWORD,CREATEDDATE,UPDATEDDATE)
+        VALUES(#{login},#{password},#{createdDate},#{updatedDate})
+    </insert>
+    <insert id="update" parameterType="User">
+        UPDATE user SET LOGIN=#{login},PASSWORD=#{password},UPDATEDDATE=#{updatedDate}
+        WHERE ID=#{id}
+    </insert>
+</mapper>
